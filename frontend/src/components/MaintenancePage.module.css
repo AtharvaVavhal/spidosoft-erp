@@ -1,0 +1,141 @@
+.page {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  background: var(--color-bg);
+  padding-block: clamp(64px, 10vh, 140px);
+  padding-inline: clamp(24px, 6vw, 96px);
+  overflow: hidden;
+}
+
+.content {
+  width: 100%;
+  min-width: 0;
+  max-width: 640px;
+  margin-inline: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  /* Slight upward bias so the block reads as optically centered, not mechanically centered. */
+  transform: translateY(-3%);
+}
+
+.markWrap {
+  position: relative;
+  width: clamp(112px, 13vw, 164px);
+  height: clamp(112px, 13vw, 164px);
+  display: grid;
+  place-items: center;
+  margin-bottom: clamp(28px, 4vw, 44px);
+  opacity: 0;
+  animation: fadeScaleIn 700ms var(--ease-premium) both;
+}
+
+.ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: conic-gradient(
+    from 0deg,
+    var(--accent-violet),
+    var(--accent-blue),
+    var(--accent-lavender),
+    var(--accent-violet-soft),
+    var(--accent-violet)
+  );
+  filter: blur(1px);
+  opacity: 0.6;
+  box-shadow: 0 0 46px rgba(126, 20, 255, 0.16);
+  animation: ringSpin 20s linear infinite;
+}
+
+.ringMask {
+  position: absolute;
+  inset: 11%;
+  border-radius: 50%;
+  background: var(--color-bg);
+}
+
+.mark {
+  position: relative;
+  width: 38%;
+  height: auto;
+  display: block;
+}
+
+.headline {
+  margin: 0;
+  min-width: 0;
+  max-width: 100%;
+  font-size: clamp(2.75rem, 7vw, 5.5rem);
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  line-height: 1.04;
+  color: var(--color-fg);
+  opacity: 0;
+  animation: fadeUp 700ms var(--ease-premium) 100ms both;
+}
+
+.supporting {
+  margin: clamp(18px, 2.4vw, 26px) 0 0;
+  min-width: 0;
+  max-width: min(46ch, 100%);
+  font-size: clamp(1rem, 1.5vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--color-fg-muted);
+  opacity: 0;
+  animation: fadeUp 600ms var(--ease-premium) 180ms both;
+}
+
+@keyframes fadeScaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+@keyframes fadeUp {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes ringSpin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 380px) {
+  .content {
+    transform: translateY(-2%);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ring {
+    animation: none;
+  }
+
+  .markWrap,
+  .headline,
+  .supporting {
+    animation: none;
+    opacity: 1;
+    transform: none;
+  }
+}

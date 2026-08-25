@@ -1,0 +1,31 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&display=swap');
+
+:root {
+  /* Surface */
+  --color-bg: #050506;
+  --color-fg: #f5f5f7;
+  --color-fg-muted: rgba(245, 245, 247, 0.62);
+
+  /* Brand accents, drawn from the existing SpidoSoft mark (public/favicon.svg) */
+  --accent-violet: #7e14ff;
+  --accent-violet-soft: #863bff;
+  --accent-blue: #47bfff;
+  --accent-lavender: #c9a8ff;
+
+  /* Typography */
+  --font-sans:
+    'Plus Jakarta Sans',
+    -apple-system,
+    BlinkMacSystemFont,
+    'SF Pro Display',
+    'SF Pro Text',
+    'Inter',
+    'Segoe UI',
+    Roboto,
+    Helvetica,
+    Arial,
+    sans-serif;
+
+  /* Motion */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+}
