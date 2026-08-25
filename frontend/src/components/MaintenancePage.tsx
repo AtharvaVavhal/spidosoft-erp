@@ -23,6 +23,16 @@ export function MaintenancePage() {
         rel="noopener noreferrer"
         className={styles.credit}
       >
+        <svg
+          viewBox="0 0 120 120"
+          width="13"
+          height="13"
+          className={styles.creditMark}
+          aria-hidden="true"
+        >
+          <path d="M 0,0 L 120,0 L 90,30 L 30,30 L 30,50 L 80,50 L 60,70 L 30,70 L 30,100 L 0,70 Z" fill="currentColor" />
+          <path d="M 0,90 L 30,120 L 0,120 Z" fill="currentColor" />
+        </svg>
         Developed &amp; managed by Forge Technologies
       </a>
     </main>

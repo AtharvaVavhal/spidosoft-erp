@@ -120,6 +120,9 @@
   left: 50%;
   bottom: clamp(20px, 4vh, 40px);
   transform: translateX(-50%);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
   text-decoration: none;
   font-size: 0.75rem;
   letter-spacing: 0.01em;
@@ -129,7 +132,7 @@
   padding-bottom: 2px;
   background-image: linear-gradient(currentColor, currentColor);
   background-repeat: no-repeat;
-  background-position: 0 100%;
+  background-position: 19px 100%;
   background-size: 0% 1px;
   transition: color 180ms ease, background-size 280ms var(--ease-premium);
   white-space: nowrap;
@@ -138,7 +141,12 @@
 .credit:hover,
 .credit:focus-visible {
   color: var(--color-fg);
-  background-size: 100% 1px;
+  background-size: calc(100% - 19px) 1px;
+}
+
+.creditMark {
+  flex-shrink: 0;
+  opacity: 0.85;
 }
 
 @keyframes fadeIn {
@@ -208,9 +216,17 @@
 
 @media (max-width: 420px) {
   .credit {
+    flex-direction: column;
+    gap: 8px;
     white-space: normal;
     text-align: center;
     max-width: calc(100% - 48px);
+    background-image: none;
+  }
+
+  .credit:hover,
+  .credit:focus-visible {
+    background-image: none;
   }
 }
 
