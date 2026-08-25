@@ -16,6 +16,15 @@ export function MaintenancePage() {
           shortly.
         </p>
       </div>
+
+      <a
+        href="https://forgebuilds.in"
+        target="_blank"
+        rel="noopener noreferrer"
+        className={styles.credit}
+      >
+        Developed &amp; managed by Forge Technologies
+      </a>
     </main>
   )
 }
