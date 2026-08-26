@@ -5,65 +5,83 @@
 
   ### Enterprise Resource Planning for structured business operations.
 
-  A modular ERP platform being engineered for<br/>
-  **Spidosoft Technologies OPC Pvt. Ltd.**
+  A modular ERP platform being engineered for **Spidosoft Technologies OPC Pvt. Ltd.**
 
-  [Live Demo](https://spidosoft-erp-ch48.vercel.app/) · [Repository](https://github.com/AtharvaVavhal/spidosoft-erp)
+  <p>
+    <a href="https://spidosoft-erp-ch48.vercel.app/">
+      <img src="https://img.shields.io/badge/🌐_Live_Demo-141414?style=for-the-badge" alt="Live Demo" />
+    </a>
+    <a href="https://github.com/AtharvaVavhal/spidosoft-erp">
+      <img src="https://img.shields.io/badge/⭐_Repository-141414?style=for-the-badge" alt="Repository" />
+    </a>
+  </p>
 
   ![Status](https://img.shields.io/badge/status-in%20development-f5a623?style=flat-square)
   ![React](https://img.shields.io/badge/React-19-149eca?style=flat-square&logo=react&logoColor=white)
   ![TypeScript](https://img.shields.io/badge/TypeScript-3178c6?style=flat-square&logo=typescript&logoColor=white)
+  ![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
   ![Java](https://img.shields.io/badge/Java-21-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
   ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
   ![MySQL](https://img.shields.io/badge/MySQL-4479A1?style=flat-square&logo=mysql&logoColor=white)
+
+  <sub>Industrial ERP · Modular Architecture · Master Data · REST APIs · Enterprise Workflows</sub>
 </div>
-
-<br/>
-
-Spidosoft ERP is an industrial ERP system engineered for **Spidosoft Technologies OPC Pvt. Ltd.** by a Computer Engineering team at **Vishwakarma Institute of Technology, Pune**. It is built around a centralized master-data foundation, a clean frontend/backend separation, and a modular architecture designed to grow with the business.
-
-<br/>
-
-## Contents
-
-[Overview](#overview) · [Modules](#modules) · [Architecture](#architecture) · [Engineering Principles](#engineering-principles) · [Technology Stack](#technology-stack) · [Repository](#repository) · [Quick Start](#quick-start) · [Workflow](#workflow) · [Team](#team) · [Status](#status) · [Roadmap](#roadmap)
 
 <br/>
 
 ## Overview
 
-At its core, Spidosoft ERP centralizes the master data that drives day-to-day operations — items, customers, and suppliers — and the structured relationships between them. The system is designed as a **modular monolith**: a single, cohesively organized backend service paired with an independent React frontend, communicating over a REST API.
+Spidosoft ERP is an industrial ERP system engineered for **Spidosoft Technologies OPC Pvt. Ltd.** by a Computer Engineering team at **Vishwakarma Institute of Technology, Pune**.
 
-This structure keeps the codebase easy to reason about while leaving room to grow — new operational modules can be added without disturbing the master-data core.
+The system centers on a single source of truth for the master data that drives daily operations — items, customers, and suppliers — and the structured relationships between them.
+
+It's built as a **modular monolith**: one cohesively organized backend paired with an independently deployable React frontend, communicating over a REST API. This keeps the codebase easy to reason about while leaving room for new operational modules to be added without disturbing the master-data core.
+
+<br/>
+
+## Snapshot
+
+| | |
+|---|---|
+| **Industry Partner** | Spidosoft Technologies OPC Pvt. Ltd. |
+| **Institution** | VIT Pune |
+| **Architecture** | Modular Monolith |
+| **Frontend** | React + TypeScript |
+| **Backend** | Java + Spring Boot |
+| **Database** | MySQL |
+| **API** | REST / JSON |
+| **Security** | Spring Security + JWT |
+
+> The target architecture above is being introduced incrementally as development progresses — see [Status](#status) for what's running today.
 
 <br/>
 
 ## Modules
 
-**Master Data** — established by the Spidosoft functional reference
+**Master Data**
 
 | Module | Description |
 |---|---|
-| **Item Master** | Item code, name, material, type, UOM, HSN/SAC, GST rate, cost, pricing, and specification data |
-| **Customer Master** | Customer identity, contact, address, and GSTIN records |
-| **Supplier Master** | Supplier identity, contact, and business records |
-| **Item Mapping** | Item ↔ Customer and Item ↔ Supplier relationships |
+| Item Master | Structured item records — identity, classification, pricing, specification |
+| Customer Master | Centralized customer identity and business records |
+| Supplier Master | Centralized supplier identity and business records |
+| Item Mapping | Item ↔ Customer and Item ↔ Supplier relationships |
 
-**Operations** — current engineering focus
+**Operations**
 
 | Module | Description |
 |---|---|
-| **Maintenance / Work Orders** | Operational maintenance workflows, defined and iterated on by the engineering team |
+| Maintenance / Work Orders | Operational maintenance workflows, defined and iterated on by the engineering team |
 
 ```mermaid
 flowchart LR
     ERP["Spidosoft ERP"] --> MD["Master Data"]
     ERP --> OPS["Operations"]
 
-    MD --> ITEM["Item Master"]
-    MD --> CUSTOMER["Customer Master"]
-    MD --> SUPPLIER["Supplier Master"]
-    MD --> MAP["Item Mapping"]
+    MD --> ITEM["Item"]
+    MD --> CUSTOMER["Customer"]
+    MD --> SUPPLIER["Supplier"]
+    MD --> MAP["Mapping"]
     MAP --> IC["Item ↔ Customer"]
     MAP --> IS["Item ↔ Supplier"]
 
@@ -79,16 +97,32 @@ flowchart LR
 
 ```mermaid
 flowchart TB
-    USER["Users"] --> FE["React + TypeScript<br/>Vite"]
-    FE --> API["REST API / JSON"]
-    API --> BE["Spring Boot · Java 21"]
-    BE --> CTRL["Controller"]
-    CTRL --> DTO["DTO + Validation"]
-    DTO --> SERVICE["Service"]
-    SERVICE --> MAPPER["MapStruct"]
-    MAPPER --> REPO["Repository"]
-    REPO --> JPA["Spring Data JPA / Hibernate"]
-    JPA --> DB[("MySQL")]
+    USER["Users"]
+
+    subgraph FRONTEND["Frontend"]
+        FE["React + TypeScript"]
+        VITE["Vite"]
+    end
+
+    subgraph BACKEND["Backend · Java 21"]
+        API["REST API"]
+        CTRL["Controller"]
+        DTO["DTO + Validation"]
+        SERVICE["Service"]
+        MAPPER["MapStruct"]
+        REPO["Repository"]
+    end
+
+    DB[("MySQL")]
+
+    USER --> FE
+    FE --> API
+    API --> CTRL
+    CTRL --> DTO
+    DTO --> SERVICE
+    SERVICE --> MAPPER
+    MAPPER --> REPO
+    REPO --> DB
 ```
 
 **Security model**
@@ -101,19 +135,19 @@ flowchart LR
     RBAC --> API["Protected REST API"]
 ```
 
-The system is intentionally a **modular monolith**, not a microservices architecture — one deployable backend, cleanly separated by module boundaries.
+The system is intentionally a modular monolith — not a microservices architecture — one deployable backend, cleanly separated by module boundaries.
 
 <br/>
 
 ## Engineering Principles
 
-- Modular by feature, not by convenience
+- Feature-oriented architecture
 - Strong type safety across frontend and backend
-- Clear separation of concerns — controller, service, repository
-- API-first backend design
-- Secure by design — validation and access control at the boundary
+- Clear separation of concerns
+- API-first design
+- Secure boundaries by design
 - Reusable, composable UI primitives
-- Testable services and predictable data flow
+- Testable services
 - Review-driven Git workflow
 
 <br/>
@@ -124,9 +158,12 @@ The system is intentionally a **modular monolith**, not a microservices architec
 React · TypeScript · Vite · React Router · TanStack Query · Axios · React Hook Form · Zod · CSS Modules · CSS Variables · Lucide React
 
 **Backend**
-Java 21 · Spring Boot · Maven · Spring Data JPA · Hibernate · MapStruct · Jakarta Validation · Spring Security · JWT
+Java 21 · Spring Boot · Maven · Spring Data JPA · Hibernate · MapStruct · Jakarta Validation
 
-**Data**
+**Security**
+Spring Security · JWT · RBAC / Permissions
+
+**Database**
 MySQL · Flyway
 
 **Testing**
@@ -135,7 +172,7 @@ JUnit 5 · Mockito · Spring Boot Test · MockMvc · Vitest · React Testing Lib
 **Engineering**
 Git · GitHub · GitHub Actions · OpenAPI
 
-> Stack entries represent the agreed target architecture and are introduced incrementally as each module is implemented. See [Status](#status) for what's currently running.
+> This is the agreed technology baseline for the platform. Entries are adopted as their corresponding modules are implemented — see [Status](#status).
 
 <br/>
 
@@ -155,7 +192,7 @@ spidosoft-erp/
     └── vite.config.ts
 ```
 
-The repository is currently in its frontend foundation stage. The Spring Boot backend, database layer, and ERP modules are being introduced incrementally.
+The repository is currently in its frontend foundation stage. The backend, database layer, and ERP modules are being introduced incrementally.
 
 <br/>
 
@@ -176,25 +213,17 @@ npm run dev
 | `npm run build` | Production build |
 | `npm run preview` | Preview the production build |
 
-**Live preview:** [spidosoft-erp-ch48.vercel.app](https://spidosoft-erp-ch48.vercel.app/) — currently the project's landing experience, while ERP functionality is under active development.
+**Live preview:** [spidosoft-erp-ch48.vercel.app](https://spidosoft-erp-ch48.vercel.app/) — the project's current landing experience, while ERP functionality is under active development.
 
 <br/>
 
 ## Workflow
 
 ```
-feature/*
-    ↓
-Pull Request
-    ↓
-Code Review
-    ↓
-develop
-    ↓
-main
+feature/*  →  Pull Request  →  Code Review  →  develop  →  main
 ```
 
-Work happens on feature branches off `develop`. Every change is validated, opened as a pull request, and reviewed before merging. Stable changes are periodically promoted from `develop` to `main`.
+Work happens on feature branches off `develop`, validated and reviewed via pull request before merging. Stable changes are periodically promoted from `develop` to `main`.
 
 <br/>
 
@@ -216,13 +245,13 @@ Work happens on feature branches off `develop`. Every change is validated, opene
 | Repository | 🟢 Active |
 | Frontend Foundation | 🟢 Active |
 | ERP Application Shell | 🟡 Next |
-| Backend (Spring Boot) | 🟡 Planned |
-| Database (MySQL) | 🟡 Planned |
-| Authentication & RBAC | 🟡 Planned |
-| Master Data Modules | 🟡 In Development |
-| Maintenance / Work Orders | 🟡 In Development |
-| Automated Testing | ⚪ Planned |
-| Production Deployment | ⚪ Future |
+| Backend | 🟡 Planned |
+| Database | 🟡 Planned |
+| Authentication | 🟡 Planned |
+| Master Data | 🟡 In Development |
+| Maintenance | 🟡 In Development |
+| Testing | ⚪ Planned |
+| Production | ⚪ Future |
 
 <br/>
 
@@ -248,13 +277,13 @@ Work happens on feature branches off `develop`. Every change is validated, opene
 
 ## Documentation
 
-Project documentation is being developed alongside implementation and will be linked here as it lands.
+Project documentation is being developed alongside implementation.
 
 <br/>
 
 ## Security
 
-The target security architecture includes Spring Security, JWT-based authentication, RBAC-based permissions, server-side validation, and environment-based secrets management. These will be introduced as the backend is implemented — no secrets or credentials are stored in this repository.
+Target security architecture: Spring Security, JWT authentication, RBAC-based permissions, server-side validation, and environment-based secrets management — introduced as the backend is implemented. No secrets or credentials are stored in this repository.
 
 <br/>
 
@@ -270,7 +299,7 @@ License — TBD
 
 **Spidosoft ERP**
 
-Built at Vishwakarma Institute of Technology, Pune<br/>
+Built at Vishwakarma Institute of Technology, Pune
 for Spidosoft Technologies OPC Pvt. Ltd.
 
 </div>
