@@ -236,6 +236,8 @@ Work happens on feature branches off `develop`, validated and reviewed via pull 
 | Swapnil Pawar | Backend · Database · Persistence |
 | Janhavi Waychal | Frontend · QA · Documentation |
 
+**Project Guide:** Prof. Rahul Pawar — Department of Computer Engineering (Software Engineering), VIT Pune
+
 <br/>
 
 ## Status
