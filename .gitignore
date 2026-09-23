@@ -3,3 +3,6 @@ docs/source/
 
 # macOS
 .DS_Store
+
+# Client deliverables (questionnaires, PDFs) — sent to the client, never committed
+docs/client-delivery/
