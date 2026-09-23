@@ -1,0 +1,100 @@
+/* Scroll container: the table scrolls horizontally inside its panel, never the page (r4). */
+.scroll {
+  position: relative; /* contains absolutely-positioned sr-only text so it cannot widen the page */
+  overflow: auto;
+  min-height: 0;
+  flex: 1;
+}
+.table {
+  width: 100%;
+  border-collapse: separate;
+  border-spacing: 0;
+  table-layout: fixed; /* fixed column geometry shared by every state (r4) */
+  font-size: var(--font-size-13);
+}
+.table th {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+  height: 32px;
+  padding: 0 var(--space-12);
+  background: var(--color-surface-subtle);
+  border-bottom: 1px solid var(--color-border);
+  color: var(--color-text-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+  text-align: left;
+  white-space: nowrap;
+}
+.table td {
+  height: var(--table-row-default);
+  padding: 0 var(--space-12);
+  border-bottom: 1px solid var(--color-border-subtle);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis; /* only the flexible column should ever need this (r5) */
+}
+.table tbody tr:last-child td {
+  border-bottom: 0;
+}
+.table tbody tr:hover td {
+  background: var(--color-surface-subtle);
+}
+.table tbody tr[aria-selected='true'] td {
+  background: var(--color-selection-bg);
+}
+.table tbody tr.stateRow:hover td {
+  background: transparent;
+}
+.right {
+  text-align: right !important;
+  font-variant-numeric: tabular-nums;
+}
+.center {
+  text-align: center !important;
+}
+.toneSecondary {
+  color: var(--color-text-secondary);
+}
+.toneTertiary {
+  color: var(--color-text-tertiary);
+}
+.checkCell {
+  width: 40px;
+  padding-right: 0 !important;
+}
+.headerInner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-6);
+}
+.stateCell {
+  height: 280px !important;
+  padding-top: 64px !important;
+  vertical-align: top;
+  text-align: center;
+  white-space: normal !important;
+}
+.stateCellCompact {
+  padding: 0 !important;
+  white-space: normal !important;
+}
+.skeleton {
+  display: block;
+  height: 10px;
+  border-radius: 3px;
+  background: var(--color-surface-muted);
+}
+.right .skeleton {
+  margin-left: auto;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .skeleton {
+    animation: pulse 1.4s ease-in-out infinite;
+  }
+}
+@keyframes pulse {
+  50% {
+    opacity: 0.55;
+  }
+}

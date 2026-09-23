@@ -1,0 +1,30 @@
+/* One row at ≥1280px; the search field is the only shrinking element (min 200px) (r5). */
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  padding: 10px var(--space-12);
+  border-bottom: 1px solid var(--color-border);
+  flex: none;
+  flex-wrap: wrap;
+}
+@media (min-width: 1280px) {
+  .toolbar {
+    flex-wrap: nowrap;
+  }
+}
+.search {
+  flex: 1 1 280px;
+  min-width: 200px;
+  max-width: 320px;
+}
+.end {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: var(--space-4);
+  flex: none;
+  font-size: var(--font-size-13);
+  color: var(--color-text-tertiary);
+  font-variant-numeric: tabular-nums;
+}

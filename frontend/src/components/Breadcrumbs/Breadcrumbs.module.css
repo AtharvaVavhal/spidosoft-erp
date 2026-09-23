@@ -1,0 +1,58 @@
+.crumbs {
+  min-width: 0;
+  overflow: hidden;
+}
+.list {
+  display: flex;
+  gap: var(--space-6);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--font-size-13);
+  color: var(--color-text-tertiary);
+  white-space: nowrap;
+}
+.item + .item::before {
+  content: '/';
+  margin-right: var(--space-6);
+  color: var(--color-border-control);
+}
+.link {
+  color: var(--color-text-tertiary);
+  text-decoration: none;
+  border-radius: 2px;
+}
+.link:hover {
+  color: var(--color-text);
+  text-decoration: underline;
+}
+.current {
+  display: inline-block;
+  max-width: 280px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  vertical-align: bottom;
+  color: var(--color-text);
+  font-weight: var(--font-weight-medium);
+}
+.more {
+  display: none;
+}
+.more + .item::before {
+  content: none;
+  margin: 0;
+}
+/* Constrained width: collapse to "… / Current Page" (r4). */
+@media (max-width: 1100px) {
+  .collapsible {
+    display: none;
+  }
+  .more {
+    display: list-item;
+  }
+  .more + .collapsible + .item::before,
+  .more ~ .item:last-child::before {
+    content: '/';
+    margin-right: var(--space-6);
+  }
+}

@@ -1,0 +1,21 @@
+# Database profile — PLACEHOLDERS ONLY. Activate with SPRING_PROFILES_ACTIVE=db.
+#
+# The database engine is TBD (docs/10 §9, decision 1). Before this profile can be used:
+#   1. Spidosoft confirms the engine/version and supplies the schema (DDL or backup).
+#   2. The matching JDBC driver dependency is added to pom.xml (none is declared today).
+#   3. ERP_DB_URL / ERP_DB_USERNAME / ERP_DB_PASSWORD / ERP_DB_DRIVER are provided via environment.
+# Schema generation is disabled: the ERP maps to the confirmed schema, it never creates or alters it.
+spring:
+  datasource:
+    url: ${ERP_DB_URL}
+    username: ${ERP_DB_USERNAME}
+    password: ${ERP_DB_PASSWORD}
+    driver-class-name: ${ERP_DB_DRIVER}
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: false
+
+erp:
+  database:
+    configured: true

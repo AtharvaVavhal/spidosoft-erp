@@ -1,0 +1,75 @@
+.control {
+  width: 100%;
+  height: var(--control-height-md);
+  padding: 0 10px;
+  border: 1px solid var(--color-border-control);
+  border-radius: var(--radius-control);
+  background: var(--color-surface); /* controls sit on surface so border.control keeps 3:1 (r2 rule) */
+  color: var(--color-text);
+  font-size: var(--font-size-13);
+}
+.control::placeholder {
+  color: var(--color-text-tertiary);
+}
+.control:hover:not(:disabled, [readonly]) {
+  border-color: var(--color-text-tertiary);
+}
+.control:focus-visible {
+  border-color: var(--color-focus-ring);
+}
+.control:disabled {
+  background: var(--color-surface-subtle);
+  border-color: var(--color-border);
+  color: var(--color-text-disabled);
+  cursor: not-allowed;
+}
+.control[readonly] {
+  background: var(--color-surface-subtle);
+  border-color: var(--color-border);
+  color: var(--color-text-secondary);
+}
+.control[aria-invalid='true'] {
+  border-color: var(--color-danger);
+}
+.numeric {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.wrap {
+  position: relative;
+}
+.affix {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: grid;
+  place-items: center;
+  color: var(--color-text-tertiary);
+  font-size: var(--font-size-13);
+  pointer-events: none;
+}
+.prefix {
+  left: 10px;
+}
+.suffix {
+  right: 10px;
+}
+.hasPrefix {
+  padding-left: 28px;
+}
+.hasSuffix {
+  padding-right: 28px;
+}
+.leadingIcon {
+  position: absolute;
+  left: 9px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: var(--icon-size);
+  height: var(--icon-size);
+  color: var(--color-text-tertiary);
+  pointer-events: none;
+}
+.hasIcon {
+  padding-left: 32px;
+}

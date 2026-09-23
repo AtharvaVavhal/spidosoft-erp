@@ -1,0 +1,26 @@
+.panel {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-panel); /* r4: panels 6px */
+}
+.section {
+  padding: var(--space-16) var(--space-20) var(--space-20);
+}
+.section + .section {
+  border-top: 1px solid var(--color-border);
+}
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-12);
+  margin-bottom: var(--space-12);
+  flex-wrap: wrap;
+}
+.sectionTitle {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+}
+.sectionDescription {
+  font-size: var(--font-size-13);
+  color: var(--color-text-tertiary);
+}

@@ -1,0 +1,16 @@
+.region {
+  position: fixed;
+  right: var(--space-16);
+  bottom: var(--space-16);
+  z-index: var(--z-toast);
+  display: grid;
+  gap: var(--space-8);
+  width: min(380px, calc(100vw - 32px));
+}
+.toast {
+  box-shadow: var(--shadow-md);
+}
+.message {
+  display: block;
+  margin-top: var(--space-2);
+}
