@@ -3,10 +3,7 @@
 # Spidosoft ERP
 
 **Enterprise Resource Planning Platform**
-
 Built from scratch for Spidosoft Technologies OPC Pvt. Ltd.
-
-<br/>
 
 ![Status](https://img.shields.io/badge/status-documentation_phase-8792A2?style=flat-square)
 ![Design System](https://img.shields.io/badge/design_system-locked_r5-2A5CAA?style=flat-square)
@@ -15,14 +12,13 @@ Built from scratch for Spidosoft Technologies OPC Pvt. Ltd.
 
 </div>
 
-<br/>
+---
 
 > [!IMPORTANT]
 > No application functionality is implemented yet. This repository currently holds project
-> documentation and a frontend starter scaffold only. Read this page in full before assuming
-> anything about the codebase.
+> documentation and a frontend starter scaffold only.
 
-<br/>
+### At a glance
 
 | | |
 |---|---|
@@ -30,32 +26,21 @@ Built from scratch for Spidosoft Technologies OPC Pvt. Ltd.
 | **Project type** | Enterprise Resource Planning platform, greenfield |
 | **Current phase** | Documentation and requirement analysis (Phase 1–2 of 13) |
 | **Frontend** | React · TypeScript · Vite |
-| **Backend** | Java 21 · Spring Boot *(planned, not created)* |
+| **Backend** | Java 21 · Spring Boot — planned, not created |
 | **Database** | To be confirmed |
 
-<br/>
+### Contents
 
-## Contents
+[Overview](#overview) · [Current Status](#current-status) · [Product Scope](#product-scope) ·
+[Architecture](#architecture) · [Technology Stack](#technology-stack) ·
+[Repository Structure](#repository-structure) · [Application Modules](#application-modules) ·
+[Design System](#design-system) · [Development](#development) ·
+[Environment Configuration](#environment-configuration) · [Testing & Quality](#testing--quality) ·
+[API](#api) · [Database](#database) · [Engineering Principles](#engineering-principles) ·
+[Known Constraints](#known-constraints--open-decisions) · [Roadmap](#roadmap) ·
+[Documentation](#documentation)
 
-- [Overview](#overview)
-- [Current status](#current-status)
-- [Product scope](#product-scope)
-- [Architecture](#architecture)
-- [Technology stack](#technology-stack)
-- [Repository structure](#repository-structure)
-- [Application modules](#application-modules)
-- [Design system](#design-system)
-- [Development](#development)
-- [Environment configuration](#environment-configuration)
-- [Testing & quality](#testing--quality)
-- [API](#api)
-- [Database](#database)
-- [Engineering principles](#engineering-principles)
-- [Known constraints & open decisions](#known-constraints--open-decisions)
-- [Roadmap](#roadmap)
-- [Documentation](#documentation)
-
-<br/>
+---
 
 ## Overview
 
@@ -69,7 +54,7 @@ an Item to one or more Suppliers or Customers through an Add → GridView → Sa
 Everything beyond that requirement — additional ERP modules, screens, and workflows — is out of
 scope until formally supplied by Spidosoft.
 
-<br/>
+---
 
 ## Current Status
 
@@ -87,7 +72,7 @@ scope until formally supplied by Spidosoft.
 | Integration | Not started |
 | Production deployment | Not started |
 
-<br/>
+---
 
 ## Product Scope
 
@@ -102,7 +87,7 @@ Confirmed by the Supplied Requirement Material:
 Referenced but not yet in scope, pending screenshots: the full Item List (search, pagination,
 export, print, upload) and the full Create Item Master screen.
 
-<br/>
+---
 
 ## Architecture
 
@@ -124,13 +109,9 @@ backend and are mirrored in the UI for feedback.
 > The database engine is unconfirmed. Schema evidence (`dbo` schema, `varchar(max)` columns) is
 > consistent with Microsoft SQL Server, but this has not been confirmed by Spidosoft.
 
-<br/>
+---
 
 ## Technology Stack
-
-<table>
-<tr>
-<td valign="top" width="50%">
 
 **Frontend**
 
@@ -146,9 +127,6 @@ backend and are mirrored in the UI for feedback.
 | Icons | Lucide React | Planned |
 | Lint | oxlint | In scaffold |
 
-</td>
-<td valign="top" width="50%">
-
 **Backend**
 
 | Concern | Choice | Status |
@@ -160,11 +138,7 @@ backend and are mirrored in the UI for feedback.
 | Database | To be confirmed | Not started |
 | Auth | Not specified | To be confirmed |
 
-</td>
-</tr>
-</table>
-
-<br/>
+---
 
 ## Repository Structure
 
@@ -176,7 +150,7 @@ backend and are mirrored in the UI for feedback.
 
 `backend/` does not exist yet. No database code, migrations, or tests exist yet.
 
-<br/>
+---
 
 ## Application Modules
 
@@ -188,26 +162,26 @@ backend and are mirrored in the UI for feedback.
 | Supplier Master | Schema known · screen not yet specified |
 | Item ↔ Customer/Supplier mapping | Functional flow specified · persistence blocked |
 
-<br/>
+---
 
 ## Design System
 
 The UI design system is **locked at revision r5** (2026-09-23).
 Full specification: [`docs/06-ui-specification.md`](docs/06-ui-specification.md)
 
-<table>
-<tr><td width="140"><b>Typography</b></td><td>Inter, weights 400 / 500 / 600. Tabular numbers in tables, codes, and numeric inputs.</td></tr>
-<tr><td><b>Palette</b></td><td>"Steel Cobalt on Ink Neutrals" — primary <code>#2A5CAA</code> / <code>#234E93</code> / <code>#1D4179</code> · canvas <code>#F5F7FA</code> · surface <code>#FFFFFF</code> · text <code>#172033</code> / <code>#3F4B5F</code> / <code>#5C6877</code>. Single accent, no gradients, light mode only.</td></tr>
-<tr><td><b>Density</b></td><td>High information density without clutter. Fixed table columns sized to content, one flexible ellipsis column, list pages fill the viewport with a scrolling table body.</td></tr>
-<tr><td><b>Components</b></td><td>A design-system layer (tokens + generic accessible components) is built first and consumed by feature screens, which never define their own colors, spacing, or one-off controls.</td></tr>
-<tr><td><b>Accessibility</b></td><td>WCAG 2.2 AA contrast, visible keyboard focus, semantic HTML. Checks are repeated against implemented components, not just the palette in isolation.</td></tr>
-<tr><td><b>Responsive</b></td><td>Validated at 1440, 1280, and 1024px desktop widths and a 768px top-bar breakpoint. Phone/mobile layout is not yet defined.</td></tr>
-</table>
+| | |
+|---|---|
+| **Typography** | Inter, weights 400 / 500 / 600. Tabular numbers in tables, codes, and numeric inputs. |
+| **Palette** | "Steel Cobalt on Ink Neutrals" — primary `#2A5CAA` / `#234E93` / `#1D4179` · canvas `#F5F7FA` · surface `#FFFFFF` · text `#172033` / `#3F4B5F` / `#5C6877`. Single accent, no gradients, light mode only. |
+| **Density** | High information density without clutter. Fixed table columns sized to content, one flexible ellipsis column, list pages fill the viewport with a scrolling table body. |
+| **Components** | A design-system layer (tokens + generic accessible components) is built first and consumed by feature screens, which never define their own colors, spacing, or one-off controls. |
+| **Accessibility** | WCAG 2.2 AA contrast, visible keyboard focus, semantic HTML. Checks are repeated against implemented components, not just the palette in isolation. |
+| **Responsive** | Validated at 1440, 1280, and 1024px desktop widths and a 768px top-bar breakpoint. Phone/mobile layout is not yet defined. |
 
 The lock covers the design system only — the business and database open questions below are
 unaffected by it.
 
-<br/>
+---
 
 ## Development
 
@@ -225,7 +199,7 @@ npm run typecheck     # tsc -b --noEmit
 
 There is no backend to run — `backend/` has not been created.
 
-<br/>
+---
 
 ## Environment Configuration
 
@@ -233,7 +207,7 @@ No environment variables are defined yet. Database connection details, credentia
 configuration are unresolved pending the decisions in
 [`docs/10-database-requirements-validation.md`](docs/10-database-requirements-validation.md).
 
-<br/>
+---
 
 ## Testing & Quality
 
@@ -245,7 +219,7 @@ configuration are unresolved pending the decisions in
 | Backend tests | — | No backend exists |
 | Accessibility gates | axe, keyboard walkthroughs, contrast checks | Documented in `docs/08`, not implemented |
 
-<br/>
+---
 
 ## API
 
@@ -258,7 +232,7 @@ No API is implemented. [`docs/07-api-specification.md`](docs/07-api-specificatio
 | Item Master CRUD | Blocked · primary-key semantics of `dbo.ItemMaster` unresolved |
 | Mapping persistence | Placeholder only · no shape defined until mapping storage is confirmed |
 
-<br/>
+---
 
 ## Database
 
@@ -290,7 +264,7 @@ No API is implemented. [`docs/07-api-specification.md`](docs/07-api-specificatio
 
 Full findings: [`docs/10-database-requirements-validation.md`](docs/10-database-requirements-validation.md)
 
-<br/>
+---
 
 ## Engineering Principles
 
@@ -304,7 +278,7 @@ From [`CLAUDE.md`](CLAUDE.md):
 - The UI design system is locked; screens compose it rather than defining one-off styles
 - Frontend and backend stay separated; the frontend talks to the backend only through the API
 
-<br/>
+---
 
 ## Known Constraints & Open Decisions
 
@@ -324,7 +298,7 @@ Phase 2 is blocked pending Spidosoft decisions on:
 
 No backend code will be written until the items marked backend-blocking in `docs/10` §10 are resolved.
 
-<br/>
+---
 
 ## Roadmap
 
@@ -347,7 +321,7 @@ explicitly requested and its exit criteria are met. No dates are committed.
 | 12 | Testing |
 | 13 | Production readiness |
 
-<br/>
+---
 
 ## Documentation
 
@@ -364,13 +338,10 @@ explicitly requested and its exit criteria are met. No dates are committed.
 | [`docs/09-implementation-plan.md`](docs/09-implementation-plan.md) | Phased implementation plan |
 | [`docs/10-database-requirements-validation.md`](docs/10-database-requirements-validation.md) | Phase 2 validation report and decisions required from Spidosoft |
 
-<br/>
+---
 
 <div align="center">
 
-—
-
-**Spidosoft Technologies OPC Pvt. Ltd.**
-Internal engineering repository
+**Spidosoft Technologies OPC Pvt. Ltd.** · Internal engineering repository
 
 </div>
