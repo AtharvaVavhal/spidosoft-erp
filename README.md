@@ -10,6 +10,18 @@ Built from scratch for Spidosoft Technologies OPC Pvt. Ltd.
 ![Database](https://img.shields.io/badge/database-engine_unconfirmed-5C6877?style=flat-square)
 ![Backend](https://img.shields.io/badge/backend-not_started-A3ACB9?style=flat-square)
 
+**In scaffold**
+![React](https://img.shields.io/badge/React-20232A?style=flat-square&logo=react&logoColor=61DAFB)
+![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?style=flat-square&logo=typescript&logoColor=white)
+![Vite](https://img.shields.io/badge/Vite-646CFF?style=flat-square&logo=vite&logoColor=white)
+
+**Planned, not installed**
+![React Router](https://img.shields.io/badge/React_Router-CA4245?style=flat-square&logo=reactrouter&logoColor=white)
+![TanStack Query](https://img.shields.io/badge/TanStack_Query-FF4154?style=flat-square&logo=reactquery&logoColor=white)
+![Zod](https://img.shields.io/badge/Zod-3E67B1?style=flat-square&logo=zod&logoColor=white)
+![Java](https://img.shields.io/badge/Java_21-ED8B00?style=flat-square&logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring_Boot-6DB33F?style=flat-square&logo=springboot&logoColor=white)
+
 </div>
 
 ---
@@ -264,6 +276,21 @@ No API is implemented. [`docs/07-api-specification.md`](docs/07-api-specificatio
 
 Full findings: [`docs/10-database-requirements-validation.md`](docs/10-database-requirements-validation.md)
 
+<details>
+<summary><b>Column-level detail</b> — ItemMaster, CustomerMaster, SupplierMaster</summary>
+
+| Table | Columns | Confirmed identity |
+|---|---|---|
+| `dbo.ItemMaster` | 25 | `ID` + `ItemCode` both marked PK (composite key inferred, not confirmed) |
+| `dbo.CustomerMaster` | 28 | `Id` (PK) |
+| `dbo.SupplierMaster` | 27 | `Id` (PK) |
+
+Exact column names, SQL types, nullability, and per-column confidence ratings are in
+[`docs/04-database-schema.md`](docs/04-database-schema.md). Nothing here is summarized loosely —
+that file is the authoritative, evidence-cited source.
+
+</details>
+
 ---
 
 ## Engineering Principles
@@ -297,6 +324,15 @@ Phase 2 is blocked pending Spidosoft decisions on:
 11. Item List scope, pending the missing reference screenshots
 
 No backend code will be written until the items marked backend-blocking in `docs/10` §10 are resolved.
+
+<details>
+<summary><b>Full 11-item decision list with evidence</b></summary>
+
+See [`docs/10-database-requirements-validation.md`](docs/10-database-requirements-validation.md) §9
+for each decision's supporting evidence IDs and the exact contradiction it resolves (C1–C17 in
+that document's Phase 2I contradiction audit).
+
+</details>
 
 ---
 
