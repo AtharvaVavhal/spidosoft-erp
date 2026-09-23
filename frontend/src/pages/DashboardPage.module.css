@@ -1,0 +1,18 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-16);
+  margin-top: var(--space-12);
+  max-width: 1120px;
+}
+.links {
+  display: grid;
+  gap: var(--space-4);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.links a {
+  color: var(--color-link);
+  font-size: var(--font-size-13);
+}

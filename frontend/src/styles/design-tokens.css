@@ -1,0 +1,179 @@
+/*
+ * SpidoSoft ERP design tokens — UI DESIGN SYSTEM LOCKED r5 (docs/06-ui-specification.md).
+ * "Steel Cobalt on Ink Neutrals". Light mode only (dark mode deferred).
+ *
+ * Two tiers (docs/08):
+ *   1. Palette tier  (--palette-*)  raw locked values. Never referenced by components.
+ *   2. Role tier     (--color-*, --shadow-*, …) semantic roles. Components use ONLY these.
+ * Changing a locked value requires a recorded revision approved by the project owner.
+ */
+
+:root {
+  /* ── 1. Palette tier ─────────────────────────────────────────────────── */
+  --palette-primary-600: #2A5CAA;
+  --palette-primary-700: #234E93;
+  --palette-primary-800: #1D4179;
+  --palette-primary-subtle: #E1E9F6;
+  --palette-on-primary: #FFFFFF;
+
+  --palette-bg-canvas: #F5F7FA;
+  --palette-bg-surface: #FFFFFF;
+  --palette-bg-subtle: #F0F3F7;
+  --palette-bg-muted: #E6EAF0;
+
+  --palette-border-subtle: #E6EAF0;
+  --palette-border-default: #D5DBE3;
+  --palette-border-control: #8792A2;
+
+  --palette-text-primary: #172033;
+  --palette-text-secondary: #3F4B5F;
+  --palette-text-tertiary: #5C6877;
+  --palette-text-disabled: #A3ACB9;
+
+  --palette-success-solid: #16803C;
+  --palette-success-text: #146C36;
+  --palette-success-tint: #EAF6EE;
+  --palette-success-border: #BFE0CB;
+
+  --palette-warning-solid: #A16207;
+  --palette-warning-text: #8A5200;
+  --palette-warning-tint: #FFF7E6;
+  --palette-warning-border: #F3D9A4;
+
+  --palette-danger-solid: #C62828;
+  --palette-danger-text: #B71C1C;
+  --palette-danger-tint: #FDECEC;
+  --palette-danger-border: #F5C2C2;
+
+  --palette-chart-cat-1: #2A5CAA;
+  --palette-chart-cat-2: #B86B1E;
+  --palette-chart-cat-3: #3E9B8A;
+  --palette-chart-cat-4: #8A6BB0;
+  --palette-chart-cat-5: #C4567F;
+  --palette-chart-cat-6: #7B8798;
+
+  --palette-chart-seq-1: #E1E9F6;
+  --palette-chart-seq-2: #B7CAE8;
+  --palette-chart-seq-3: #7FA0D3;
+  --palette-chart-seq-4: #4974B9;
+  --palette-chart-seq-5: #2A5CAA;
+  --palette-chart-seq-6: #1D4179;
+
+  /* text.primary as an rgb triple for alpha shadows/scrim — no new hue (r4/r5). */
+  --palette-ink-rgb: 23 32 51;
+
+  /* ── 2. Role tier: colour ────────────────────────────────────────────── */
+  --color-canvas: var(--palette-bg-canvas);
+  --color-surface: var(--palette-bg-surface);
+  --color-surface-subtle: var(--palette-bg-subtle);
+  --color-surface-muted: var(--palette-bg-muted);
+
+  --color-border-subtle: var(--palette-border-subtle);
+  --color-border: var(--palette-border-default);
+  --color-border-control: var(--palette-border-control);
+
+  --color-text: var(--palette-text-primary);
+  --color-text-secondary: var(--palette-text-secondary);
+  --color-text-tertiary: var(--palette-text-tertiary);
+  --color-text-disabled: var(--palette-text-disabled);
+
+  --color-accent: var(--palette-primary-600);
+  --color-accent-hover: var(--palette-primary-700);
+  --color-accent-pressed: var(--palette-primary-800);
+  --color-on-accent: var(--palette-on-primary);
+  --color-link: var(--palette-primary-700);
+  --color-focus-ring: var(--palette-primary-600);
+  --color-selection-bg: var(--palette-primary-subtle);
+
+  --color-success: var(--palette-success-solid);
+  --color-success-text: var(--palette-success-text);
+  --color-success-tint: var(--palette-success-tint);
+  --color-success-border: var(--palette-success-border);
+  --color-warning: var(--palette-warning-solid);
+  --color-warning-text: var(--palette-warning-text);
+  --color-warning-tint: var(--palette-warning-tint);
+  --color-warning-border: var(--palette-warning-border);
+  --color-danger: var(--palette-danger-solid);
+  --color-danger-text: var(--palette-danger-text);
+  --color-danger-tint: var(--palette-danger-tint);
+  --color-danger-border: var(--palette-danger-border);
+
+  /* Info has no blue of its own: bg.subtle + text.secondary + primary.600 icon. */
+  --color-info-bg: var(--palette-bg-subtle);
+  --color-info-text: var(--palette-text-secondary);
+  --color-info-icon: var(--palette-primary-600);
+  --color-info-border: var(--palette-border-default);
+
+  --color-chart-grid: var(--palette-border-subtle);
+  --color-chart-axis-text: var(--palette-text-tertiary);
+  --color-chart-label-on-light: var(--palette-text-primary); /* sequential steps 1–3 */
+  --color-chart-label-on-dark: var(--palette-on-primary); /* sequential steps 4–6 */
+
+  /* ── Role tier: elevation & overlay (text.primary with documented alphas) ── */
+  --shadow-none: none;
+  --shadow-sm: 0 1px 2px rgb(var(--palette-ink-rgb) / 0.08), 0 2px 6px rgb(var(--palette-ink-rgb) / 0.06);
+  --shadow-md: 0 12px 32px rgb(var(--palette-ink-rgb) / 0.16), 0 2px 6px rgb(var(--palette-ink-rgb) / 0.08);
+  --overlay-scrim: rgb(var(--palette-ink-rgb) / 0.4);
+  --focus-ring: 0 0 0 2px var(--palette-bg-surface), 0 0 0 4px var(--color-focus-ring);
+
+  /* ── Typography: Inter 400/500/600 ───────────────────────────────────── */
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-size-12: 12px;
+  --font-size-13: 13px;
+  --font-size-14: 14px;
+  --font-size-16: 16px;
+  --font-size-20: 20px;
+  --font-size-24: 24px;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --line-height-ui: 1.4;
+  --line-height-prose: 1.5;
+
+  /* ── Spacing (4px base) ──────────────────────────────────────────────── */
+  --space-0: 0;
+  --space-2: 2px;
+  --space-4: 4px;
+  --space-6: 6px;
+  --space-8: 8px;
+  --space-12: 12px;
+  --space-16: 16px;
+  --space-20: 20px;
+  --space-24: 24px;
+  --space-32: 32px;
+  --space-40: 40px;
+  --space-48: 48px;
+
+  /* ── Sizing ──────────────────────────────────────────────────────────── */
+  --control-height-sm: 28px;
+  --control-height-md: 32px;
+  --control-height-lg: 36px;
+  --table-row-compact: 32px;
+  --table-row-default: 36px;
+  --table-row-comfortable: 44px;
+  --sidebar-width: 240px;
+  --sidebar-width-collapsed: 56px;
+  --topbar-height: 48px;
+  --icon-size: 16px;
+  --icon-size-sm: 14px;
+  --icon-size-lg: 20px;
+
+  /* ── Radius ──────────────────────────────────────────────────────────── */
+  --radius-checkbox: 3px;
+  --radius-control: 4px; /* inputs, buttons, badges */
+  --radius-panel: 6px; /* panels/cards, menus, popovers */
+  --radius-overlay: 8px; /* dialogs, drawers */
+
+  /* ── Motion ──────────────────────────────────────────────────────────── */
+  --motion-fast: 120ms;
+  --motion-base: 160ms;
+  --motion-ease: ease-out;
+
+  /* ── Z-index layers ──────────────────────────────────────────────────── */
+  --z-dropdown: 20;
+  --z-sticky: 30;
+  --z-drawer: 40;
+  --z-dialog: 50;
+  --z-toast: 60;
+  --z-tooltip: 70;
+}

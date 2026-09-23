@@ -1,0 +1,5 @@
+# Client-provided source material — kept private, never committed
+docs/source/
+
+# macOS
+.DS_Store

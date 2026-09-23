@@ -1,0 +1,128 @@
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-6);
+  height: var(--control-height-md);
+  padding: 0 var(--space-12);
+  border: 1px solid transparent;
+  border-radius: var(--radius-control);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  line-height: 1;
+  white-space: nowrap;
+  text-decoration: none;
+  cursor: pointer;
+  transition:
+    background-color var(--motion-fast) var(--motion-ease),
+    border-color var(--motion-fast) var(--motion-ease),
+    color var(--motion-fast) var(--motion-ease);
+}
+
+.button svg {
+  width: var(--icon-size);
+  height: var(--icon-size);
+  flex: none;
+}
+
+.sm {
+  height: var(--control-height-sm);
+  padding: 0 var(--space-8);
+}
+
+/* One filled primary per view (locked rule) — enforced by usage, not by this component. */
+.primary {
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+  color: var(--color-on-accent);
+}
+.primary:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-accent-hover);
+  border-color: var(--color-accent-hover);
+}
+.primary:active:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-accent-pressed);
+  border-color: var(--color-accent-pressed);
+}
+
+.secondary {
+  background: var(--color-surface);
+  border-color: var(--color-border);
+  color: var(--color-text);
+}
+.secondary:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-surface-subtle);
+}
+.secondary:active:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-surface-muted);
+}
+
+.ghost {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+.ghost:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-surface-subtle);
+  color: var(--color-text);
+}
+
+.danger {
+  background: var(--color-danger);
+  border-color: var(--color-danger);
+  color: var(--color-on-accent);
+}
+.danger:hover:not(:disabled, [aria-disabled='true']) {
+  background: var(--color-danger-text);
+  border-color: var(--color-danger-text);
+}
+
+/* Row-level Delete (r4): neutral by default, danger only on hover/active. Never permanently red. */
+.rowDelete {
+  background: transparent;
+  color: var(--color-text-secondary);
+}
+.rowDelete svg {
+  color: var(--color-text-tertiary);
+}
+.rowDelete:hover:not(:disabled),
+.rowDelete:active:not(:disabled) {
+  background: var(--color-danger-tint);
+  color: var(--color-danger-text);
+}
+.rowDelete:hover:not(:disabled) svg,
+.rowDelete:active:not(:disabled) svg {
+  color: var(--color-danger-text);
+}
+
+.button:disabled,
+.button[aria-disabled='true'] {
+  cursor: not-allowed;
+}
+.primary:disabled,
+.primary[aria-disabled='true'],
+.danger:disabled {
+  background: var(--color-surface-muted);
+  border-color: var(--color-surface-muted);
+  color: var(--color-text-disabled);
+}
+.secondary:disabled,
+.secondary[aria-disabled='true'] {
+  background: var(--color-surface);
+  border-color: var(--color-border-subtle);
+  color: var(--color-text-disabled);
+}
+.ghost:disabled,
+.rowDelete:disabled {
+  background: transparent;
+  color: var(--color-text-disabled);
+}
+
+.spinner {
+  animation: spin 800ms linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

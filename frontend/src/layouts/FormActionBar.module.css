@@ -1,0 +1,25 @@
+/* Sticky action bar at the bottom of long forms (docs/06 §3.2). */
+.bar {
+  position: sticky;
+  bottom: calc(var(--space-24) * -1);
+  z-index: var(--z-sticky);
+  margin: var(--space-16) calc(var(--space-24) * -1) calc(var(--space-24) * -1);
+  padding: var(--space-12) var(--space-24);
+  background: var(--color-surface);
+  border-top: 1px solid var(--color-border);
+}
+.inner {
+  display: flex;
+  align-items: center;
+  gap: var(--space-8);
+  max-width: 1120px;
+}
+.meta {
+  font-size: var(--font-size-13);
+  color: var(--color-text-tertiary);
+}
+.end {
+  margin-left: auto;
+  display: flex;
+  gap: var(--space-8);
+}

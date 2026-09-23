@@ -1,0 +1,43 @@
+# SpidoSoft ERP backend — base configuration.
+# No database is configured by default. See application-nodb.yml / application-db.yml.
+spring:
+  application:
+    name: spidosoft-erp-backend
+  profiles:
+    # "nodb" keeps DataSource/JPA auto-configuration off until the database engine is confirmed
+    # (docs/10-database-requirements-validation.md §9, decision 1). Activate "db" to override.
+    default: nodb
+  jpa:
+    open-in-view: false
+  jackson:
+    default-property-inclusion: always
+    serialization:
+      write-dates-as-timestamps: false
+
+server:
+  port: ${ERP_SERVER_PORT:8080}
+  error:
+    include-stacktrace: never
+    include-message: never
+
+springdoc:
+  # Disable in production with ERP_API_DOCS_ENABLED=false.
+  api-docs:
+    path: /api/docs
+    enabled: ${ERP_API_DOCS_ENABLED:true}
+  swagger-ui:
+    path: /api/docs/ui
+    enabled: ${ERP_API_DOCS_ENABLED:true}
+  packages-to-scan: com.spidosoft.erp
+
+erp:
+  cors:
+    allowed-origins: ${ERP_CORS_ALLOWED_ORIGINS:http://localhost:5173}
+  database:
+    # Reported by /api/system/health. Set to true only by the "db" profile.
+    configured: false
+
+logging:
+  level:
+    root: INFO
+    com.spidosoft.erp: INFO
