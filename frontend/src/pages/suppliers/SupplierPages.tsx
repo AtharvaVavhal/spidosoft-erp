@@ -19,7 +19,7 @@ import { EMPTY_SUPPLIER_FORM, SUPPLIER_SECTIONS, supplierFormSchema } from './su
 const REF_TBD = 'not marked FK in the schema; reference target unknown (docs/10 C5, C6)'
 const AUDIT_TBD = 'population rules not confirmed (docs/10 §9-9)'
 /** Numeric identifiers (phone, PIN) are shown as plain digits — never grouped like quantities. */
-const digits = (v: number | null) => (v === null ? '—' : String(v))
+const digits = (v: number | string | null) => (v === null ? '—' : String(v))
 
 const columns: Array<DataTableColumn<SupplierMaster>> = [
   { key: 'code', header: 'Supplier Code', width: 120, render: (r) => <span className="tabular">{formatText(r.SuppCode)}</span> },

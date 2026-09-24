@@ -1,5 +1,6 @@
 package com.spidosoft.erp.supplier.dto;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spidosoft.erp.common.Tbd;
 import java.time.LocalDateTime;
@@ -18,7 +19,9 @@ public record SupplierResponse(
         @JsonProperty("PinCode") Long pinCode,                  // numeric(6,0) — C7
         @JsonProperty("Country") String country,
         @JsonProperty("EmailID") String emailId,
-        @JsonProperty("Telephone") Long telephone,              // numeric(18,0) — C7
+        // numeric(18,0): up to 18 digits exceeds JavaScript's safe-integer range (2^53 − 1, 16 digits), so it
+        // travels as a JSON string of digits. The column type is unchanged (docs/07 §0, C7).
+        @JsonProperty("Telephone") @JsonFormat(shape = JsonFormat.Shape.STRING) Long telephone,
         @JsonProperty("Mobile") Long mobile,                    // numeric(10,0) — C7
         @JsonProperty("Fax") String fax,
         @JsonProperty("Website") String website,

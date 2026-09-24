@@ -21,7 +21,8 @@ export function optionalDecimal20_2() {
 
 /**
  * Optional numeric(p,0) entered as text: '' → null, otherwise at most `digits` digits.
- * Kept as a string: numeric(18,0) exceeds JavaScript's safe-integer range (docs/10 C7 — wire format TBD).
+ * Kept as a string: numeric(18,0) exceeds JavaScript's safe-integer range, and the API transports
+ * SupplierMaster.Telephone as a string of digits (docs/07 §0).
  */
 export function optionalDigits(digits: number) {
   const pattern = new RegExp(`^\\d{1,${digits}}$`)
