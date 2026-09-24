@@ -173,7 +173,8 @@ The Target ERP must have a world-class, production-grade UI/UX. Full spec: `docs
     v1), and the sidebar uses the canvas family
   - the goal is appropriate accessibility with a restrained, premium enterprise look, not maximum
     contrast everywhere. Change colours only to resolve a documented accessibility issue.
-  - accessibility validation **must be repeated once the palette is in real components**, and visual
+  - accessibility validation was repeated on the real components on 2026-09-24 (`06` §3.3). Repeat it
+    whenever components or screens change materially, and visual
     validation covers the checklist in `06` §3.3
   - the Spidosoft Reference Screenshots do **not** dictate the palette
 - **Design-system rules (r4 + r5, locked)** (details in `docs/06-ui-specification.md`; these are
@@ -199,10 +200,12 @@ The Target ERP must have a world-class, production-grade UI/UX. Full spec: `docs
 - **The visual prototype resolves no business or database question.** Item Status, Last Modified,
   Item Group mapping, Base Unit mapping, Code ↔ Name linkage and any other rule it displays stay
   **TBD** until database/requirements validation (see `06` §7).
-- The visual validation prototype lives in `prototypes/visual-validation/` (isolated, not production).
+- The visual validation prototype (`prototypes/visual-validation/`) was removed on 2026-09-24 after the
+  accessibility re-check on the real components, as planned in `docs/09`. It remains available as
+  design-lock evidence in git history at commit `a7023ec` (`git show a7023ec:prototypes/visual-validation/README.md`).
   Never import from it.
-- Do not implement the palette (CSS, tokens, components) until the relevant phase is explicitly
-  requested.
+- The palette is implemented (Phase 3, `frontend/src/styles/design-tokens.css`). Change a locked value
+  only through a recorded revision approved by the project owner.
 - The UI standard never overrides the requirement. Do not add, remove or rename business fields,
   labels or actions for aesthetic reasons. Features such as bulk operations or sorting on a given
   screen still need to be confirmed as in scope.
@@ -234,6 +237,7 @@ npm run dev        # Vite dev server, http://localhost:5173 (proxies /api → :8
 npm run build      # tsc -b && vite build
 npm run lint       # oxlint
 npm run typecheck  # tsc -b --noEmit
+npm run test       # Vitest unit/component tests (no backend or database)
 
 cd backend         # JDK 21 required; on this machine it sits beside JDK 17:
 export JAVA_HOME=/opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk/Contents/Home

@@ -1,15 +1,17 @@
-# 08 · Architecture (planned)
+# 08 · Architecture
 
 > **We are building the ERP from scratch.** This is a TECHNICAL DECISION by the development team,
-> not a Spidosoft requirement, and **none of it is implemented yet** beyond the frontend starter
-> scaffold.
+> not a Spidosoft requirement. **Implemented today (Phase 3 foundation):** the frontend design
+> system, shell and screens on mock data adapters, and the backend foundation (system endpoints,
+> error handling, domain contracts only). **Not implemented:** database access, entities,
+> repositories, domain endpoints and mapping persistence (blocked on Phase 4, `10` §10).
 
 ## Overview
 
 ```
 React + TypeScript + Vite          (frontend/)
         ↓   HTTP/JSON  /api/*
-Spring Boot + Java 21              (backend/ — not created)
+Spring Boot + Java 21              (backend/ — foundation only, no persistence)
         ↓   JDBC
 Database (TO BE CONFIRMED)         dbo.ItemMaster · dbo.CustomerMaster · dbo.SupplierMaster
 ```
@@ -40,14 +42,15 @@ The Target ERP must meet the UI quality bar in `06-ui-specification.md` §1–§
 production-grade, with Linear-level clarity, Vercel-level visual discipline and high information
 density without clutter. Architecturally this means:
 
-1. **The design system is its own layer and is built first** (Phase 7), before multiple ERP screens
+1. **The design system is its own layer and is built first** (delivered in Phase 3), before multiple ERP screens
    exist. Feature screens may not define their own colours, spacing, typography or one-off controls.
 2. **Tokens as CSS Variables** (`:root`), consumed by CSS Modules. No hard-coded colour or spacing
    values in feature code.
    - **Colour direction:** Steel Cobalt on Ink Neutrals, **UI DESIGN SYSTEM — LOCKED** (r5,
-     2026-09-23; `06-ui-specification.md` is authoritative). It is not implemented yet. The Spidosoft Reference Screenshots do not dictate the palette. It uses a
+     2026-09-23; `06-ui-specification.md` is authoritative). Implemented in Phase 3 as CSS Variables in
+     `frontend/src/styles/design-tokens.css`. The Spidosoft Reference Screenshots do not dictate the palette. It uses a
      single accent (no secondary accent), no gradients, and light mode only.
-   - **Two token tiers** (PROPOSED):
+   - **Two token tiers** (IMPLEMENTED in `design-tokens.css`):
      - *Palette tier*: the raw locked (r5) values, i.e. `primary.600/700/800/subtle`, `on-primary`,
        `bg.canvas/surface/subtle/muted`, `border.subtle/default/control`,
        `text.primary/secondary/tertiary/disabled`, `success|warning|danger.solid/text/tint/border`,
@@ -91,9 +94,9 @@ density without clutter. Architecturally this means:
      Plus Jakarta Sans import is not carried into the ERP.
    - **Theming:** light mode is the only v1 theme. Dark mode is deferred, and the role tier makes it
      a later override set rather than a refactor.
-   - **Visual validation prototype:** `prototypes/visual-validation/` is an isolated, static
-     reference used for the design-system validation. Production code never imports from it, and it
-     is deleted after the UI is formally locked.
+   - **Visual validation prototype:** `prototypes/visual-validation/` was an isolated, static
+     reference used for the design-system validation. Production code never imported from it. It was
+     removed on 2026-09-24 and is preserved in git history at commit `a7023ec`.
    - **Validation gate:** the design system is locked on the basis of the prototype validation. The
      visual-validation checklist in `06` §3.3 must still be run on the real components (≈50-row Item Master table, Item Master form, sidebar,
      search/filters, buttons, badges, selected/hover rows, keyboard focus, empty/error states, chart
@@ -135,9 +138,10 @@ density without clutter. Architecturally this means:
    must follow WAI-ARIA patterns. Whether to build them in-house or adopt a headless accessibility
    library is **TO BE CONFIRMED**. Such a library is not part of the approved stack, so it needs explicit
    approval before installing.
-8. **Quality gates** (PROPOSED, TBC): automated accessibility checks (e.g. axe) in tests, keyboard-only
-   walkthroughs per screen, contrast checks on the token palette, and a design-system preview page or
-   catalogue for review before screens are built.
+8. **Quality gates:** Vitest + Testing Library + jsdom unit/component tests (`npm run test`,
+   IMPLEMENTED), including axe checks on rendered components and a contrast re-check of the token
+   palette (IMPLEMENTED). A real-browser axe + keyboard pass was run on 2026-09-24 (`06` §3.3). Still
+   PROPOSED: running these in CI, a repeatable browser test suite, and a design-system catalogue page.
 
 ## Backend: `backend/` (Phase 3 foundation)
 - **Stack:** Java 21, **Spring Boot 3.5.16**, **Maven** (wrapper `./mvnw`, Maven 3.9.16), Spring Web,

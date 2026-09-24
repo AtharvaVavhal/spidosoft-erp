@@ -41,8 +41,8 @@ CONFIRMED** until the Reference Screenshots are supplied (see `03-reference-ui.m
 | `frontend/` | Phase 3 foundation: locked design system r5, app shell, routes, Item Master UI (list/create/view-edit + mapping GridView), Customer/Supplier shells. **Domain data comes from mock adapters.** |
 | Backend | Phase 3 foundation (Spring Boot 3.5.16 / Java 21): system endpoints plus domain **contracts only**; mapping deferred |
 | Database code | None (engine TBD) |
-| Tests | Backend JUnit (16 tests). Frontend verified by typecheck, lint, build and a scripted browser walkthrough. |
-| Docs | `CLAUDE.md`, `docs/01–10`, `docs/source/`, `backend/README.md`, `frontend/README.md` |
+| Tests | Backend JUnit 5 (20 tests). Frontend Vitest (74 tests: UI logic, mapping GridView, axe and token-contrast checks), plus typecheck, lint and build. A real-browser accessibility re-check ran on 2026-09-24 (`06` §3.3). No test uses a database. |
+| Docs | `CLAUDE.md`, `docs/01–12`, `docs/source/` (local only, gitignored), `backend/README.md`, `frontend/README.md` |
 
 ## Technology stack (TECHNICAL DECISION)
 

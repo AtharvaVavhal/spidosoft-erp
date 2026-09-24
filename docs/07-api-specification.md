@@ -28,12 +28,28 @@ envelope, error format and pagination shape are implemented (§0). Auth is **TO 
   `PENDING_CONFIRMATION` (501) and `PERSISTENCE_NOT_CONFIGURED` (503).
 - The correlation id is returned in `X-Request-Id`.
 
-**Contracts only:** the endpoints in §1–§2 exist as Java controller *interfaces* (`ItemApi`,
-`CustomerApi`, `SupplierApi`) and DTOs that mirror the confirmed columns. They have **no
-implementation**, so they are neither served nor listed in OpenAPI yet. §3 stays blocked.
+**Contracts only:** Java controller *interfaces* and DTOs that mirror the confirmed columns. They
+have **no implementation**, so they are neither served (requests return 404) nor listed in OpenAPI
+yet. §3 stays blocked. The declared contracts are exactly:
 
-**Open contract question:** `SupplierMaster.Telephone` is numeric(18,0), which exceeds JavaScript's
-safe-integer range. Whether large numerics travel as JSON strings is **TBD** (`10` C7).
+| Interface | Declared operations | Relation to §1–§2 |
+|---|---|---|
+| `ItemApi` | `GET /api/items?q=&page=&size=` (search) · `POST /api/items` (create) | §2 search/create. `GET/PUT /api/items/{id}` are **not declared**: the Item key is unresolved (C3). |
+| `CustomerApi` | `GET /api/customers?q=&page=&size=` · `GET /api/customers/{id}` · `GET /api/customers/options` | `/options` = §1. List and `/{id}` back the read-only Customer list/detail shells (not in §1–§2). |
+| `SupplierApi` | `GET /api/suppliers?q=&page=&size=` · `GET /api/suppliers/{id}` · `GET /api/suppliers/options` | `/options` = §1. List and `/{id}` back the read-only Supplier list/detail shells (not in §1–§2). |
+| `MappingApi` | none (empty placeholder) | §3 blocked |
+
+`{id}` for Customer/Supplier is the table's `Id` (a single-column PK, CONFIRMED). All of the above
+stay PROVISIONAL until Phase 6.
+
+**Large numeric transport (TECHNICAL DECISION, 2026-09-24):** `SupplierMaster.Telephone` is
+numeric(18,0). Up to 18 digits exceeds JavaScript's safe-integer range (2^53 − 1, 16 digits), so it
+travels as a **JSON string of digits** (e.g. `"Telephone": "987654321098765432"`) in both responses and
+requests. The backend keeps it as a `Long` with `@Digits(integer = 18)`, and the frontend types it as
+`string | null` and never converts it to a number. The database column type is **unchanged**.
+`PinCode` numeric(6,0) and `Mobile` numeric(10,0) fit safely and stay JSON numbers. Covered by
+`SupplierTelephoneTransportTest`. The business question in `10` C7 (why Supplier and Customer use
+different types, and which formats are valid) stays **TBD**.
 
 ## 1. Lookup lists for the mapping drop-downs
 

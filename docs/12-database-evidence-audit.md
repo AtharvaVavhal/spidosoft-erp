@@ -2,7 +2,9 @@
 
 **Phase:** 4 — Database Confirmation · **Date:** 2026-09-24 · **Type:** forensic audit (read-only)
 **Repository state audited:** branch `docs/database-confirmation-questionnaire` @ `7d9eb13`
-(`main` @ `411ee11`), working tree clean.
+(`main` @ `411ee11`), working tree clean at the time of the audit. Line references (L…) below
+refer to the documents as audited; later edits may shift them. **No new database evidence has been
+received since this audit** (re-checked 2026-09-24).
 
 Status labels used throughout:
 
@@ -399,7 +401,7 @@ Only items that prevent **safe** persistence implementation are listed.
 | B14 | Delete policy unknown | Mapping rows could be left pointing at deleted records | F3 |
 
 **Handling concerns** (not blockers by themselves):
-- `SupplierMaster.Telephone` is `numeric(18,0)`, which exceeds JavaScript's safe-integer range (C7). Transport format is TBD (S11 C2).
+- `SupplierMaster.Telephone` is `numeric(18,0)`, which exceeds JavaScript's safe-integer range (C7). Transport format: **decided** after this audit — a JSON string of digits (`docs/07` §0, TECHNICAL DECISION). The business meaning and format rules stay TBD (S11 C2).
 - `datetime` columns have no time zone (S11 F1).
 - If I1 holds, `varchar(max)` code columns cannot be UNIQUE-indexed (I8).
 

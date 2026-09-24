@@ -29,9 +29,10 @@ unresolved database questions:
 - Item Master UI and Customer/Supplier shells, on mock adapters
 - the mapping GridView, as UI state only
 
-Remaining from this phase:
-- Re-run the accessibility checks on the implemented components.
-- Delete `prototypes/visual-validation/`.
+Close-out (done 2026-09-24):
+- Accessibility re-check on the implemented components: done, recorded in `06` §3.3.
+- `prototypes/visual-validation/` deleted (preserved in git history at commit `a7023ec`).
+- Frontend test runner added (Vitest), with tests for the implemented UI logic only.
 
 **Exit:** the backend builds and tests run; the shell runs, and typecheck and lint pass.
 
@@ -107,5 +108,5 @@ Remaining from this phase:
 | 12 | Testing | Phase 8 |
 | 13 | Production readiness | Phase 9 |
 
-References to "Phase 7" in `06-ui-specification.md` and `08-architecture.md` use the old numbering.
-They refer to the React application foundation, which was delivered in the new Phase 3.
+`06-ui-specification.md` and `08-architecture.md` were updated on 2026-09-24 to the new numbering. The
+revision history in `06` keeps its original wording as a historical record.

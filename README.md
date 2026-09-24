@@ -171,9 +171,11 @@ backend and are mirrored in the UI for feedback.
 ├── CLAUDE.md      Engineering rules, terminology, and source-of-truth policy
 ├── backend/       Spring Boot foundation — system endpoints, domain contracts, tests
 ├── docs/          Numbered project documentation (01–12)
-├── frontend/      React application — design system, shell, screens on mock data
-└── prototypes/    Visual validation prototype (UI design-system evidence)
+└── frontend/      React application — design system, shell, screens on mock data
 ```
+
+The visual validation prototype (`prototypes/`) was removed after the design system was implemented
+and re-checked; it is preserved in git history at commit `a7023ec`.
 
 No database code, entities, repositories or migrations exist.
 
@@ -218,6 +220,7 @@ npm run dev          # Vite dev server → http://localhost:5173 (proxies /api �
 npm run build        # tsc -b && vite build
 npm run lint         # oxlint
 npm run typecheck    # tsc -b --noEmit
+npm run test         # Vitest unit/component tests
 
 cd backend           # requires JDK 21
 ./mvnw verify            # compile + tests
@@ -243,9 +246,9 @@ credentials are unresolved pending the decisions in
 |---|---|---|
 | Frontend lint | oxlint | Configured |
 | Frontend types | `tsc` | Configured |
-| Frontend tests | — | Not set up (typecheck, lint and build are verified) |
-| Backend tests | JUnit 5 | 16 tests passing |
-| Accessibility gates | axe, keyboard walkthroughs, contrast checks | Documented in `docs/08`, not implemented |
+| Frontend tests | Vitest · Testing Library · jsdom · axe-core | 7 files, 74 tests passing (UI logic, mapping GridView behaviour, token contrast); no test uses a backend or database |
+| Backend tests | JUnit 5 | 20 tests passing |
+| Accessibility gates | axe in component tests; real-browser axe + keyboard pass | Component checks automated; browser re-check run 2026-09-24 (`docs/06` §3.3), not yet in CI |
 
 ---
 
