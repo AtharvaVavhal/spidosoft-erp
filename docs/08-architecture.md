@@ -141,7 +141,9 @@ density without clutter. Architecturally this means:
 8. **Quality gates:** Vitest + Testing Library + jsdom unit/component tests (`npm run test`,
    IMPLEMENTED), including axe checks on rendered components and a contrast re-check of the token
    palette (IMPLEMENTED). A real-browser axe + keyboard pass was run on 2026-09-24 (`06` §3.3). Still
-   PROPOSED: running these in CI, a repeatable browser test suite, and a design-system catalogue page.
+   PROPOSED: a repeatable browser test suite and a design-system catalogue page. GitHub Actions
+   (`.github/workflows/ci.yml`, IMPLEMENTED) runs backend `./mvnw clean verify` and frontend typecheck, lint,
+   test and build on every pull request and push to `main`, with no database and no secrets.
 
 ## Backend: `backend/` (Phase 3 foundation)
 - **Stack:** Java 21, **Spring Boot 3.5.16**, **Maven** (wrapper `./mvnw`, Maven 3.9.16), Spring Web,

@@ -248,7 +248,8 @@ credentials are unresolved pending the decisions in
 | Frontend types | `tsc` | Configured |
 | Frontend tests | Vitest · Testing Library · jsdom · axe-core | 7 files, 74 tests passing (UI logic, mapping GridView behaviour, token contrast); no test uses a backend or database |
 | Backend tests | JUnit 5 | 20 tests passing |
-| Accessibility gates | axe in component tests; real-browser axe + keyboard pass | Component checks automated; browser re-check run 2026-09-24 (`docs/06` §3.3), not yet in CI |
+| Accessibility gates | axe in component tests; real-browser axe + keyboard pass | Component and token-contrast checks run in CI; the browser re-check was run manually on 2026-09-24 (`docs/06` §3.3) and is not in CI |
+| CI | GitHub Actions (`.github/workflows/ci.yml`) | On pull requests and pushes to `main`: backend `./mvnw clean verify`; frontend `npm ci`, typecheck, lint, test, build. No database, no secrets. |
 
 ---
 
