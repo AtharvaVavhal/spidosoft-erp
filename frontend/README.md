@@ -13,7 +13,16 @@ npm run dev        # http://localhost:5173 — proxies /api to http://localhost:
 npm run build      # tsc -b && vite build
 npm run typecheck  # tsc -b --noEmit
 npm run lint       # oxlint
+npm run test       # Vitest (jsdom) unit/component tests
 ```
+
+## Tests
+
+Vitest + Testing Library + jsdom, with axe-core for accessibility rules. Tests cover the implemented UI
+logic only: form schemas, formatting, the API envelope client, mock helpers, the mapping GridView
+(Add → GridView, Delete, type switch) and a contrast re-check of `src/styles/design-tokens.css`. No
+test calls a backend or a database. jsdom cannot measure colour contrast, so that is covered by the
+token test and by the browser re-check recorded in `docs/06` §3.3.
 
 Environment: see `.env.example` (`VITE_API_BASE_URL`, `VITE_API_PROXY_TARGET`, `VITE_USE_MOCKS`).
 
