@@ -1,3 +1,4 @@
+/// <reference types="vitest/config" />
 import { fileURLToPath, URL } from 'node:url'
 import react from '@vitejs/plugin-react'
 import { defineConfig, loadEnv } from 'vite'
@@ -18,6 +19,16 @@ export default defineConfig(({ mode }) => {
           changeOrigin: true,
         },
       },
+    },
+    test: {
+      // Unit and component tests for implemented UI logic only. No test talks to a backend or a
+      // database: domain data comes from the in-memory mock adapters (docs/10 §10).
+      environment: 'jsdom',
+      include: ['src/**/*.test.{ts,tsx}'],
+      setupFiles: ['./src/test/setup.ts'],
+      restoreMocks: true,
+      // Process the token file so designTokens.test.ts can read it via ?raw (other CSS stays stubbed).
+      css: { include: [/design-tokens\.css/] },
     },
   }
 })

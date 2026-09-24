@@ -4,6 +4,7 @@ import static com.spidosoft.erp.validation.ColumnLimits.SUPPLIER_MOBILE_DIGITS;
 import static com.spidosoft.erp.validation.ColumnLimits.SUPPLIER_PIN_CODE_DIGITS;
 import static com.spidosoft.erp.validation.ColumnLimits.SUPPLIER_TELEPHONE_DIGITS;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.spidosoft.erp.common.Tbd;
 import jakarta.validation.constraints.Digits;
@@ -28,7 +29,9 @@ public record SupplierRequest(
         @JsonProperty("PinCode") @Digits(integer = SUPPLIER_PIN_CODE_DIGITS, fraction = 0) Long pinCode,
         @JsonProperty("Country") String country,
         @JsonProperty("EmailID") String emailId,
-        @JsonProperty("Telephone") @Digits(integer = SUPPLIER_TELEPHONE_DIGITS, fraction = 0) Long telephone,
+        // numeric(18,0) travels as a JSON string of digits (docs/07 §0, C7).
+        @JsonProperty("Telephone") @JsonFormat(shape = JsonFormat.Shape.STRING)
+        @Digits(integer = SUPPLIER_TELEPHONE_DIGITS, fraction = 0) Long telephone,
         @JsonProperty("Mobile") @Digits(integer = SUPPLIER_MOBILE_DIGITS, fraction = 0) Long mobile,
         @JsonProperty("Fax") String fax,
         @JsonProperty("Website") String website,

@@ -16,10 +16,11 @@ export interface SupplierMaster {
   Country: string | null
   EmailID: string | null
   /**
-   * numeric(18,0). TODO(api-contract): values above Number.MAX_SAFE_INTEGER (16 digits) lose precision in
-   * JSON → JS number. Transport as string is a backend contract decision (docs/10 C7) — not decided here.
+   * numeric(18,0) in the database. Up to 18 digits exceeds Number.MAX_SAFE_INTEGER (16 digits), so the API
+   * transports it as a string of digits (docs/07 §0, TECHNICAL DECISION). Never convert it to a number.
+   * PinCode (6 digits) and Mobile (10 digits) fit safely and stay numbers.
    */
-  Telephone: number | null
+  Telephone: string | null
   Mobile: number | null
   Fax: string | null
   Website: string | null

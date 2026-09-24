@@ -1,6 +1,8 @@
-# 04 · Database Schema (Phase 2 validated)
+# 04 · Database Schema (validated evidence)
 
-> **Status: Phase 2 (database and requirements validation), 2026-09-23.** This document records only
+> **Status: database and requirements validation, 2026-09-23** (produced under the earlier label
+> "Phase 2"; under the standardized numbering in `09` this is Phase 4 — Database Confirmation. Section
+> IDs 2A–2E are kept as stable references). This document records only
 > what the Supplied Requirement Material shows. Nothing here is inferred from the Reference UI or the
 > visual prototype. The consolidated report, including business rules, contradictions and open
 > decisions, is in `10-database-requirements-validation.md`.

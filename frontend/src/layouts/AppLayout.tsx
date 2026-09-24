@@ -19,7 +19,9 @@ export function AppLayout() {
       <Sidebar collapsed={collapsed} onToggle={() => setCollapsed(!collapsed)} />
       <div className={styles.main}>
         <TopBar />
-        <main id="workspace" className={styles.workspace} tabIndex={-1}>
+        {/* The workspace is the page's scroll container. tabIndex 0 lets keyboard users reach it and scroll
+            with the arrow keys even when a page (e.g. a detail view) has no focusable content (WCAG 2.1.1). */}
+        <main id="workspace" className={styles.workspace} tabIndex={0}>
           <Outlet />
         </main>
       </div>

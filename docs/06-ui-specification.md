@@ -32,17 +32,18 @@ yet.**
 | Palette | **"Steel Cobalt on Ink Neutrals"** (§3.3): primary `#2A5CAA` / `#234E93` / `#1D4179` / subtle `#E1E9F6` / on-primary `#FFFFFF`; neutrals `#F5F7FA` `#FFFFFF` `#F0F3F7` `#E6EAF0`; borders `#E6EAF0` `#D5DBE3` `#8792A2`; text `#172033` `#3F4B5F` `#5C6877` `#A3ACB9`; semantic success/warning/danger as in §3.3; categorical `#2A5CAA #B86B1E #3E9B8A #8A6BB0 #C4567F #7B8798`; sequential `#E1E9F6 #B7CAE8 #7FA0D3 #4974B9 #2A5CAA #1D4179`. Light mode only (dark mode deferred). |
 | Scope of the lock | §1–§5 of this document: quality bar, accessibility rules, foundations, components, colour system, layout conventions and data-heavy patterns |
 | Responsive validation dimensions | 1440×900 and 1440×1900 (full form), **1280×800** (normal desktop minimum), 1024×700, **768×700** (top-bar breakpoint). Phone/mobile layout is **TBD** and not part of the lock. |
-| Validation evidence | `prototypes/visual-validation/` (isolated prototype + screenshots) |
+| Validation evidence | `prototypes/visual-validation/` (isolated prototype + screenshots). Removed from the working tree on 2026-09-24 after the re-check on real components; preserved in git history at commit `a7023ec`. |
 
 **Outside the UI lock:** all business and database TBDs remain open and are **not** resolved by this
 lock or by the prototype. That includes ItemMaster Status, Last Modified, Item Group mapping, Base
 Unit mapping, Code ↔ Name linkage, mapping storage and save behaviour, required-field sets, and every
 item in `02-requirements.md` §5 and `04-database-schema.md`. Screen-level content in §6–§9 (fields,
 columns, wireframes) follows the requirements and is finalised per screen. Accessibility checks
-must still be **repeated on the implemented components** in Phase 7.
+must still be **repeated on the implemented components** (the components were built in Phase 3;
+see §3.3 "Validation requirements" for the re-check record).
 
-The only UI in the repository today is the scaffold's `MaintenancePage`. Leave it untouched unless
-explicitly instructed. Its decorative style (gradient ring, glows, blur animations, dark hero) is
+The ERP UI is implemented in `frontend/` (Phase 3). The scaffold's `MaintenancePage` is kept but no
+longer routed. Leave it untouched unless explicitly instructed. Its decorative style (gradient ring, glows, blur animations, dark hero) is
 **not** the ERP visual language.
 
 ---
@@ -105,7 +106,8 @@ actions, etc.) are **TBC** for each screen until confirmed in scope.
 
 ## 3. Design system
 
-All values are **LOCKED (r5)** and are implemented as CSS Variables in Phase 7. Components are built
+All values are **LOCKED (r5)** and are implemented as CSS Variables (Phase 3,
+`frontend/src/styles/design-tokens.css`). Components are built
 on these tokens only.
 
 ### 3.1 Foundations
@@ -160,7 +162,8 @@ loading, invalid where relevant) and keyboard behaviour.
 ### 3.3 Colour system: "Steel Cobalt on Ink Neutrals"
 
 > **Steel Cobalt on Ink Neutrals is LOCKED (r5, 2026-09-23).**
-> It is **not implemented** yet: no CSS variables or components exist. Implementation happens in Phase 7.
+> It is **implemented** (Phase 3) as CSS Variables in `frontend/src/styles/design-tokens.css`, consumed
+> by the design-system components.
 > The Spidosoft Reference Screenshots are functional/UI references and **do not dictate this
 > palette**.
 >
@@ -303,8 +306,31 @@ operation, and a subjective review against the "restrained, premium enterprise" 
 
 **Result:** visual validation ran on 2026-09-23 using `prototypes/visual-validation/`. Findings were
 resolved in r4, and final additions were made in r5. The final review decision was **PASS**, and the
-design system was **LOCKED at r5**. The checklist above still applies to the implemented components
-in Phase 7 (repeat the accessibility checks on real components).
+design system was **LOCKED at r5**.
+
+**Re-check on the implemented components (2026-09-24, Phase 3 close-out).** Run against the production
+build (`vite build` + `vite preview`, backend running, mock data adapters) in Google Chrome, using axe-core
+4.13 (WCAG 2.0/2.1/2.2 A and AA tags, including colour contrast) and scripted keyboard walks:
+- **Screens:** Dashboard; Item Master list (loaded, empty, error, no search match); Create Item Master
+  (empty, with 2 GridView rows, validation errors shown, Clear confirm dialog open); Item Master
+  detail/edit; Customer and Supplier Master list, detail and form shells; 404.
+- **axe:** **0 violations** after one fix. Found and fixed: `scrollable-region-focusable` on the
+  Customer/Supplier detail pages. The workspace scroll container was not keyboard-reachable when a page
+  had no focusable content, so it is now a tab stop (`tabIndex=0`) with an inset 2px `primary.600`
+  focus ring. Axe left a few colour-contrast results as "incomplete" (it cannot read a background under
+  the select chevron image or a sticky header). They were measured manually: Select Code / Select Name
+  placeholder `text.tertiary` on surface 5.67:1; page title `text.primary` on canvas 15.16:1. The disabled
+  Manufacturer Name select (`text.disabled` on `bg.subtle`, 2.06:1) is exempt as an inactive control.
+- **Keyboard:** every tab stop on every screen shows a visible focus indicator. The mapping flow works by
+  keyboard (Add, Delete via Enter). The Clear dialog is modal, takes focus, is labelled and closes on
+  Escape. Submitting with an empty Item Code marks the field `aria-invalid`, links the message via
+  `aria-describedby` and moves focus to the error.
+- **Responsive:** no page-level horizontal scroll and a single-row (48px) top bar at 1440, 1280, 1024
+  and 768px on the Item Master list and form.
+- **Tokens:** the implemented `design-tokens.css` values are re-checked against every pair in the
+  contrast pre-check above by `frontend/src/styles/designTokens.test.ts` (runs with `npm run test`).
+- **Not covered:** charts and row selection (no implemented screen uses them yet); screen-reader testing
+  with NVDA/VoiceOver; 200–400% zoom/reflow; phone layout (TBD). These stay open.
 
 ---
 
@@ -420,7 +446,7 @@ follows the §5 patterns.
 
 **Open requirements (TBD). Not resolved by the visual prototype.** The prototype used the columns
 Item Group, Item Type, Base Unit, Status and Last Modified **as sample data only**. The following must
-be resolved during database/requirements validation (Phase 2):
+be resolved during Phase 4 — Database Confirmation:
 - **ItemMaster Status**: `dbo.ItemMaster` has no status column. Whether an item status exists, and its
   values, is TBD.
 - **ItemMaster Last Modified**: no modification timestamp exists. `SystEmentryDate` is an entry date;
@@ -439,5 +465,8 @@ The brief names Save, Upload Excel and Back. The Reference Screenshot
 is TBC.
 
 ## 9. Navigation and routes: TBC
-The Reference UI sidebar labels are mostly truncated. Module grouping and route paths are decided in
-Phase 7 (React Router).
+The Reference UI sidebar labels are mostly truncated, so their module grouping is TBC. The Phase 3
+foundation uses these routes (TECHNICAL DECISION, React Router): `/` (Dashboard),
+`/masters/items`, `/masters/items/new`, `/masters/items/:id`, and the same list / `new` / `:id`
+pattern under `/masters/customers` and `/masters/suppliers`. `:id` for Items is `ItemMaster.ID`;
+the identifying key is TBD (`10` C3).

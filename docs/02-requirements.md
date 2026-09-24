@@ -75,7 +75,7 @@ The stack is listed in `01-project-overview.md` and `08-architecture.md`, and th
 
 ## 5. TO BE CONFIRMED
 
-Phase 2 classification of these questions (CONFIRMED / INFERRED / TBD), the contradiction audit, and
+Phase 4 (Database Confirmation) classification of these questions (CONFIRMED / INFERRED / TBD), the contradiction audit, and
 the decisions required from Spidosoft are in `10-database-requirements-validation.md`.
 
 | # | Question |
