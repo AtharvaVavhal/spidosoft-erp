@@ -56,5 +56,5 @@ All of the above are installed (Phase 3). Backend: Spring Boot 3.5.16 with a Mav
 
 ## Development stage
 
-Documentation and UI lock are done. **Phase 2 (database/requirements validation) is open**, waiting on
-Spidosoft (`10`). The **Phase 3 foundation** is built on top of what is confirmed (see `09`).
+Documentation and UI lock are done. **Phase 4 — Database Confirmation is open**, waiting on
+Spidosoft (`10`, `11`, `12`). The **Phase 3 foundation** is built on top of what is confirmed (see `09`).

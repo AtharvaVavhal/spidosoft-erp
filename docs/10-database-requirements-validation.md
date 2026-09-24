@@ -1,6 +1,9 @@
-# 10 · Database & Requirements Validation Report (Phase 2)
+# 10 · Database & Requirements Validation Report (Phase 4)
 
-**Date:** 2026-09-23 · **Status:** Phase 2 findings recorded. Awaiting Spidosoft decisions.
+**Date:** 2026-09-23 · **Status:** Phase 4 (Database Confirmation) findings recorded. Awaiting Spidosoft decisions.
+**Numbering note:** this report was produced under the earlier label "Phase 2". Its section IDs
+(2A–2J, e.g. §2F, §2I) are kept unchanged as stable references. Under the standardized numbering
+(`09`), this work belongs to Phase 4 — Database Confirmation.
 **Inputs reviewed:** `CLAUDE.md`, `docs/01–09`, and `docs/source/Item Master OR Customer And Supplier Master Mapping Problem STMT - ERP APP.docx`
 (re-extracted in full: 36 words of text, 9 images; no SQL, comments, alt text, hyperlinks or
 embedded objects).
@@ -85,8 +88,8 @@ No contradiction below has been resolved. Each needs the stated decision.
 
 | # | Issue | Source A | Source B | Conflict | Required decision |
 |---|---|---|---|---|---|
-| C1 | Column spelling | Source schema: `SystEmentryDate`, `supptypeid` (E1, E4, E6) | Phase 2 brief: "SystemEntryDate", "SuppTypeId" | Different identifiers. Code using the brief's spelling would not match the DB. | Confirm that the actual DB spellings match the screenshots. Until then, docs use the source spelling. |
-| C2 | ItemMaster column list | Source: 25 columns incl. `RawMaterial varchar(50)` (E1) | Phase 2 brief: 24 columns, no `RawMaterial` | A column is missing from the brief | Confirm `RawMaterial` is part of ItemMaster, and its meaning vs `Material` |
+| C1 | Column spelling | Source schema: `SystEmentryDate`, `supptypeid` (E1, E4, E6) | Database-validation brief (then labelled "Phase 2"): "SystemEntryDate", "SuppTypeId" | Different identifiers. Code using the brief's spelling would not match the DB. | Confirm that the actual DB spellings match the screenshots. Until then, docs use the source spelling. |
+| C2 | ItemMaster column list | Source: 25 columns incl. `RawMaterial varchar(50)` (E1) | Database-validation brief: 24 columns, no `RawMaterial` | A column is missing from the brief | Confirm `RawMaterial` is part of ItemMaster, and its meaning vs `Material` |
 | C3 | ItemMaster key | E1: `ID` **and** `ItemCode` both marked PK (composite, INFERRED) | `07` API: `GET/PUT /api/items/{id}`, `/items/{itemId}/mappings` assume a single key | A single-key API vs a composite PK | What identifies an Item (ID, ItemCode, or the pair)? Is `ID` IDENTITY? Is either column unique alone? |
 | C4 | Duplicate text vs FK columns | ItemMaster `Color`+`ColourId`, `UOM`+`UnitId`, `Username`+`UserId`, `LoginBranch`+`BranchId`. Customer/Supplier `City/State/Country/Branch` + `…Id` (E1–E6). | `06` §6.1 maps the "Manufacturer Name" drop-down to an FK, which assumes FK-driven lookups | Two sources of truth per attribute | For each pair: which is authoritative, must both be written, and are the text columns legacy? |
 | C5 | Supplier vs Customer FKs | CustomerMaster `CityId…LoginUserId` marked **FK** (E4) | SupplierMaster same-named columns **not marked FK** (E6) | Asymmetric referential integrity | Are the Supplier `…Id` columns FKs? To which tables? |
@@ -210,5 +213,6 @@ They don't block the first backend slice (party option lists + Item + mapping):
   phone/mobile layout.
 
 ---
-**STOP.** Phase 2 cannot complete until Spidosoft answers the decisions in §9. No implementation
-has started.
+**STOP.** Phase 4 cannot complete until Spidosoft answers the decisions in §9. No database
+persistence has been implemented (the Phase 3 foundation contains no entities, repositories or
+migrations).
